@@ -5,34 +5,44 @@ from plugin import plugin, complete, require, alias
 
 @require(network=True)
 @alias("Stack","stackoverflow","Stackoverflow")
-
 @plugin("stack")
 
-def nombre(jarvis,s):
-    objeto = Conexion.Stack()
-    jarvis.say(objeto.holi())
-
-'''
-List_of_questions = []
-#----------object "stack" creation
-stack = Conexion.Stack()
-#-----------------Making question to "API-REST"
-pregunta = input('bienvenido al asistente de preguntas por consola de Stackoverflow, porfavor ingrese su pregunta: \n')
-
-List_of_questions = stack.ask(pregunta)
-print("Aca se muestra la lista de preguntas, seleccione el numero de la pregunta: ")
-for i in range(0,len(List_of_questions)):
-    print(str(i) + ": " + List_of_questions[i])
-#-----------------Choosing the best question and getting answer
-respuesta = int(input('A cual de las preguntas anteriores desea acceder? : '))
-
-#print(stack.getAnswer(respuesta))
-List_of_answers = stack.getAnswer(respuesta)
-print("============================================ORIGINAL QUESTION========================================================================== \n")
-for i in range(0,len(List_of_answers)):
-    print(List_of_answers[i])
-    print("============================================ANSWER " + str(i+1) + "============================================================= \n")
-
-#----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
-del stack
-'''
+class stacko():
+    """
+    Ask any question in stackoverflow,
+    the format is stack question,
+    then you'll be prompt to a list of questions,
+    acordin to your criteria, you'll then choose
+    wich question you like by typing the number of it,
+    and you can visualise the entire question thread with
+    the answer.
+    ---- Example:
+         stack how to print in c
+    """
+    #===========================================================
+    def __init__(self):
+        self.stack = Conexion.Stack()
+    #===========================================================
+    def __call__(self, jarvis, s):
+        self.ask(jarvis, s)
+        s2 = input("PLEASE CHOOSE WHICH QUESTION YOU LIKE:  ")
+        self.answ(jarvis, s2)
+        #----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
+        del self.stack
+    #============================================================
+    def ask(self, jarvis, s):
+        self.stack = Conexion.Stack()
+        List_of_questions = self.stack.ask(s)
+        jarvis.say("HERE YOU CAN SEE ALL QUESTIONS RELATED TO YOUR SEARCH : ")
+        for i in range(0,len(List_of_questions)):
+            jarvis.say(str(i) + ": " + List_of_questions[i])
+    #============================================================
+    def answ(self,jarvis, s):
+        List_of_answers = self.stack.getAnswer(int(s))
+        jarvis.say("============================================ " + self.stack.title[int(s)].upper() + " =================================================================== \n")
+        for i in range(0,len(List_of_answers)):
+            jarvis.say(List_of_answers[i])
+            if i+1 < len(List_of_answers):
+                jarvis.say("============================================ANSWER " + str(i+1) + "============================================================= \n")
+            else:
+                jarvis.say("================================================================================================================== \n")
