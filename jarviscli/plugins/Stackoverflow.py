@@ -24,9 +24,19 @@ class stacko():
         self.stack = Conexion.Stack()
     #===========================================================
     def __call__(self, jarvis, s):
-        self.ask(jarvis, s)
-        s2 = input("PLEASE CHOOSE WHICH QUESTION YOU LIKE:  ")
-        self.answ(jarvis, s2)
+        k = s.split(' ',1)
+        if len(k) == 1:
+            jarvis.say("Steps to use stackoverflow in J.A.R.V.I.S:\n-stack your question here\n-then choose a question form the menu")
+        else:
+            self.ask(jarvis, s)
+            try:
+                s2 = int(input("PLEASE CHOOSE WHICH QUESTION YOU LIKE:  "))
+                if s2 < len(self.stack.title):
+                    self.answ(jarvis, s2)
+                else:
+                    jarvis.say("PLEASE CHOOSE ONLY A NUMBER FROM THE MENU!!!")
+            except ValueError:
+                jarvis.say("PLEASE CHOOSE A NUMBER!!!")
         #----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
         del self.stack
     #============================================================
