@@ -37,7 +37,7 @@ class stacko():
                 if s2 < len(self.stack.title):
                     self.answ(jarvis, s2)
                     #----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
-                    del self.stack
+                    self.stack.reset()#<---resets all variables(arguments)
                 else:
                     jarvis.say("PLEASE CHOOSE ONLY A NUMBER FROM THE MENU!!!")
         
@@ -60,4 +60,4 @@ class stacko():
                 jarvis.say("============================================ANSWER " + str(i+1) + "============================================================= \n")
             else:
                 jarvis.say("================================================================================================================== \n")
- 
+   
