@@ -10,8 +10,8 @@ from plugin import plugin, complete, require, alias
 class stacko():
     """
     Ask any question in stackoverflow,
-    the format is stack question,
-    then you'll be prompt to a list of questions,
+    the format is: stack question,
+    then you'll be prompt to a list of questions
     acordin to your criteria, you'll then choose
     wich question you like by typing the number of it,
     and you can visualise the entire question thread with
@@ -20,35 +20,39 @@ class stacko():
          stack how to print in c
     """
     #===========================================================
+    #--------Defining the class constructor with an argument(object): stack
     def __init__(self):
         self.stack = Conexion.Stack()
     #===========================================================
+    #--------First method of the class it basicly works like a main
     def __call__(self, jarvis, s):
         k = s.split(' ',1)
-        if len(k) == 1:
+        if len(k) == 1:#<----if the user doesn't put anything he will be prompt with the commands he can type
             jarvis.say("Steps to use stackoverflow in J.A.R.V.I.S:\n-stack your question here\n-then choose a question form the menu")
-        else:
+        else:#<-----If he types a question we call the method ask
             self.ask(jarvis, s)
-            try:
+            try:#-------Here we need two validations, one if the user put something that is not a number, and the other if a user
+                #-------put a number that is not in the list
                 s2 = int(input("PLEASE CHOOSE WHICH QUESTION YOU LIKE:  "))
                 if s2 < len(self.stack.title):
                     self.answ(jarvis, s2)
+                    #----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
+                    del self.stack
                 else:
                     jarvis.say("PLEASE CHOOSE ONLY A NUMBER FROM THE MENU!!!")
+        
             except ValueError:
                 jarvis.say("PLEASE CHOOSE A NUMBER!!!")
-        #----------------ONCE THE OBJECT IS UTILIZED WE SHOULD ELIMINATE IT
-        del self.stack
     #============================================================
     def ask(self, jarvis, s):
-        self.stack = Conexion.Stack()
-        List_of_questions = self.stack.ask(s)
+        List_of_questions = self.stack.ask(s)#<----the interaction with the API returns a list that we can iterate with, we save
+        #------------------------------------------all the results in the atribute of the class Stack() on the API
         jarvis.say("HERE YOU CAN SEE ALL QUESTIONS RELATED TO YOUR SEARCH : ")
         for i in range(0,len(List_of_questions)):
             jarvis.say(str(i) + ": " + List_of_questions[i])
     #============================================================
     def answ(self,jarvis, s):
-        List_of_answers = self.stack.getAnswer(int(s))
+        List_of_answers = self.stack.getAnswer(s)#<----The API returns a list of all the questions, all we need to do is iterate
         jarvis.say("============================================ " + self.stack.title[int(s)].upper() + " =================================================================== \n")
         for i in range(0,len(List_of_answers)):
             jarvis.say(List_of_answers[i])
