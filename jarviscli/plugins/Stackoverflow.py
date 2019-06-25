@@ -1,6 +1,6 @@
 ##===============Model of how to access Stack class in the folder StackApi
 ## ACA TIENEN QUE ESTAR TODAS LAS VALIDACIONES DE TIPO DE ELEMENTOS A ENVIAR
-import StackApi.Stack as Conexion
+import Stack as Conexion
 from plugin import plugin, complete, require, alias
 
 @require(network=True)
