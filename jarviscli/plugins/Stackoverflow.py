@@ -4,7 +4,7 @@ import StackApi.Stack as Conexion
 from plugin import plugin, complete, require, alias
 
 @require(network=True)
-@alias("Stack","stackoverflow","Stackoverflow")
+@alias("Stack","stackoverflow","Stackoverflow","STACK","STACKOVERFLOW")
 @plugin("stack")
 
 class stacko():
@@ -60,3 +60,4 @@ class stacko():
                 jarvis.say("============================================ANSWER " + str(i+1) + "============================================================= \n")
             else:
                 jarvis.say("================================================================================================================== \n")
+ 
