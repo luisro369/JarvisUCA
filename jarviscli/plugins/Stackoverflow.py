@@ -47,9 +47,12 @@ class stacko():
     def ask(self, jarvis, s):
         List_of_questions = self.stack.ask(s)#<----the interaction with the API returns a list that we can iterate with, we save
         #------------------------------------------all the results in the atribute of the class Stack() on the API
-        jarvis.say("HERE YOU CAN SEE ALL QUESTIONS RELATED TO YOUR SEARCH : ")
-        for i in range(0,len(List_of_questions)):
-            jarvis.say(str(i) + ": " + List_of_questions[i])
+        if List_of_questions:
+            jarvis.say("HERE YOU CAN SEE ALL QUESTIONS RELATED TO YOUR SEARCH : ")
+            for i in range(0,len(List_of_questions)):
+                jarvis.say(str(i) + ": " + List_of_questions[i])
+        else:
+            jarvis.say("CHECK YOUR INTERNET CONEXION") 
     #============================================================
     def answ(self,jarvis, s):
         List_of_answers = self.stack.getAnswer(s)#<----The API returns a list of all the questions, all we need to do is iterate
