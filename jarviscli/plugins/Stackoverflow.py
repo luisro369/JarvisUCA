@@ -71,3 +71,4 @@ class stacko():
                     jarvis.say("================================================================================================================== \n")
         else:
             jarvis.say("PLEASE CHOOSE ONLY A NUMBER IN RANGE OF THE TOTAL OF ANSWERS")
+            self.stack.reset()#<---resets all variables(arguments)
