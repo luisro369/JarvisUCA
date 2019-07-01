@@ -40,5 +40,5 @@ class Stack():
         return saludo
 
     def reset(self):
-        self.Title_link = []
-        self.title = []
+        self.Title_link.clear()
+        self.title.clear()

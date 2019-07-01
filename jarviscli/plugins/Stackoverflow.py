@@ -40,9 +40,11 @@ class stacko():
                     self.stack.reset()#<---resets all variables(arguments)
                 else:
                     jarvis.say("PLEASE CHOOSE ONLY A NUMBER FROM THE MENU!!!")
+                    self.stack.reset()#<---resets all variables(arguments)
         
             except ValueError:
                 jarvis.say("PLEASE CHOOSE A NUMBER!!!")
+                self.stack.reset()#<---resets all variables(arguments)
     #============================================================
     def ask(self, jarvis, s):
         List_of_questions = self.stack.ask(s)#<----the interaction with the API returns a list that we can iterate with, we save
