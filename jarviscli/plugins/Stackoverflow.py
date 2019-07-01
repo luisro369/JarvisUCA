@@ -41,7 +41,7 @@ class stacko():
                 else:
                     jarvis.say("PLEASE CHOOSE ONLY A NUMBER FROM THE MENU!!!")
                     self.stack.reset()#<---resets all variables(arguments)
-        
+
             except ValueError:
                 jarvis.say("PLEASE CHOOSE A NUMBER!!!")
                 self.stack.reset()#<---resets all variables(arguments)
@@ -54,15 +54,20 @@ class stacko():
             for i in range(0,len(List_of_questions)):
                 jarvis.say(str(i) + ": " + List_of_questions[i])
         else:
-            jarvis.say("CHECK YOUR INTERNET CONEXION") 
+            jarvis.say("CHECK YOUR INTERNET CONEXION")
     #============================================================
     def answ(self,jarvis, s):
         List_of_answers = self.stack.getAnswer(s)#<----The API returns a list of all the questions, all we need to do is iterate
-        jarvis.say("============================================ " + self.stack.title[int(s)].upper() + " =================================================================== \n")
-        for i in range(0,len(List_of_answers)):
-            jarvis.say(List_of_answers[i])
-            if i+1 < len(List_of_answers):
-                jarvis.say("============================================ANSWER " + str(i+1) + "============================================================= \n")
-            else:
-                jarvis.say("================================================================================================================== \n")
-   
+        j = len(List_of_answers)
+        jarvis.say("TOTAL OF ANSWERS: "+str(j))
+        s3 = int(input("HOW MANY ANSWERS SHOULD I SHOW YOU?: (0-"+str(j)+") "))
+        if s3 < len(List_of_answers):
+            jarvis.say("============================================ " + self.stack.title[int(s)].upper() + " =================================================================== \n")
+            for i in range(0,s3):
+                jarvis.say(List_of_answers[i])
+                if i+1 < s3:
+                    jarvis.say("============================================ANSWER " + str(i+1) + "============================================================= \n")
+                else:
+                    jarvis.say("================================================================================================================== \n")
+        else:
+            jarvis.say("PLEASE CHOOSE ONLY A NUMBER IN RANGE OF THE TOTAL OF ANSWERS")
