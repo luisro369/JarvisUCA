@@ -61,7 +61,7 @@ class stacko():
         j = len(List_of_answers)
         jarvis.say("TOTAL OF ANSWERS: "+str(j))
         s3 = int(input("HOW MANY ANSWERS SHOULD I SHOW YOU?: (0-"+str(j)+") "))
-        if s3 < len(List_of_answers):
+        if s3 <= len(List_of_answers):
             jarvis.say("============================================ " + self.stack.title[int(s)].upper() + " =================================================================== \n")
             for i in range(0,s3):
                 jarvis.say(List_of_answers[i])
